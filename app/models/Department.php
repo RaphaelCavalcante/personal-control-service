@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     //
-    protected $fillabel=['name'];
+    protected $fillable=['name', 'comp_id'];
 
     public function positions() {
         return $this->hasMany(Position::class);

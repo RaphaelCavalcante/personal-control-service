@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    //
+    //    
     public function index() {
         return response()->json(Employee::all());
     }
@@ -21,11 +21,9 @@ class EmployeeController extends Controller
         ]);
         $employee = new Employee($request->all());
         $position_id = $request->position;
-        
         $position = Position::find($position_id);
         $employee->save();
         
-        // $employee->position()->attach([$position]);
         $position->employees()->attach($employee);
 
 

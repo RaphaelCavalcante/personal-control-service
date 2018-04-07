@@ -2,22 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Company;
 use App\models\Department;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
     //
+    public function ping() {
+        return response('PING');
+    }
     public function index() {
         return response()->json(Department::all());
     }
     public function create(Request $request) {
         $request->validate([
             'name'=>'required',
+            'comp_id'=>'required'
         ]);
-        $department = new Department($request->all());
-        $department->save();
-
+        $company = Company::find($request->comp_id);
+        if($company!=null){
+            $department = new Department($request->all());
+            $department->save();
+        }
         return response()->json($department, 200);
     }
     public function get($id) {

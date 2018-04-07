@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
     //
+    
+    public function ping() {
+        return response('PING');
+    }
     
     public function index() {
         return response()->json(Company::all());
@@ -14,6 +19,7 @@ class CompanyController extends Controller
     public function create(Request $request) {
         $request->validate([
             'name'=>'required',
+            'address'=>'required'
         ]);
         $company = new Company($request->all());
         $company->save();

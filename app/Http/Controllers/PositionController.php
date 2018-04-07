@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\models\Position;
+use App\models\Department;
 use Illuminate\Http\Request;
 
 class PositionController extends Controller
@@ -14,9 +15,13 @@ class PositionController extends Controller
     public function create(Request $request) {
         $request->validate([
             'name'=>'required',
+            'dpt_id'=>'required'
         ]);
-        $position = new Position($request->all());
-        $position->save();
+        $department = Department::find($request->dpt_id);
+        if($department!=null){
+            $position = new Position($request->all());
+            $position->save();
+        }
         return response()->json($position, 200);
     }
     public function get($id) {
@@ -39,6 +44,13 @@ class PositionController extends Controller
             $response = 'DELETED';
         }
         return response($response);
+    }
+    public function findAllEmployeesOnPosition($id) {
+        $position = Position::find($id);
+        if($position!=null){
+            $allEmployees = $position->employees()->wherePivot('position_id', '=', $position->id)->count();
+        }
+        return response()->json($allEmployees, 200);
     }
     
 }
