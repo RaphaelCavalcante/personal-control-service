@@ -31,6 +31,10 @@ class DepartmentController extends Controller
         $department = Department::find($id);
         return response()->json($department, 200);
     }
+    public function getDepartmentPositions($id){
+        $department = Department::find($id);
+        return response()->json($department->positions()->get());
+    }
     public function update($id, Request $request){
         $request->validate([
             'name'=>'required',

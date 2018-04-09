@@ -30,6 +30,11 @@ class CompanyController extends Controller
         $company = Company::find($id);
         return response()->json($company, 200);
     }
+    public function getCompanyDepartments($id){
+        $company = Company::find($id);
+
+        return response()->json($company->departments()->get());
+    }
     public function update($id, Request $request){
         $request->validate([
             'name'=>'required',

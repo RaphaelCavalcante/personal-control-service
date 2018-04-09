@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Company
 Route::get('/company/ping', 'CompanyController@ping');
+Route::get('/company/{id}/departments', 'CompanyController@getCompanyDepartments');
 Route::post('/company', 'CompanyController@create');
 Route::get('/company', 'CompanyController@index');
 Route::get('/company/{id}', 'CompanyController@get');
@@ -27,6 +28,7 @@ Route::delete('/company/{id}', 'CompanyController@delete');
 
 //Department
 Route::get('/department/ping', 'DepartmentController@ping');
+Route::get('/department/{id}/positions', 'DepartmentController@getDepartmentPositions');
 Route::post('/department', 'DepartmentController@create');
 Route::get('/department', 'DepartmentController@index');
 Route::get('/department/{id}', 'DepartmentController@get');
@@ -48,7 +50,8 @@ Route::get('/position/employees/{id}', 'PositionController@findAllEmployeesOnPos
 Route::get('/employee/ping', 'EmployeeController@ping');
 Route::post('/employee', 'EmployeeController@create');
 Route::get('/employee', 'EmployeeController@index');
-Route::get('/employee/{id}', 'EmployeeController@get');
+Route::get('/employee/findAll', 'EmployeeController@getEmployeeList');
+Route::get('/employee/{id}', 'EmployeeController@getCompleteEmployee');
 Route::put('/employee/{id}', 'EmployeeController@update');
 Route::delete('/employee/{id}', 'EmployeeController@delete');
 
