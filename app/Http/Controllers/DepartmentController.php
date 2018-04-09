@@ -18,11 +18,12 @@ class DepartmentController extends Controller
     public function create(Request $request) {
         $request->validate([
             'name'=>'required',
-            'comp_id'=>'required'
+            'company_id'=>'required'
         ]);
-        $company = Company::find($request->comp_id);
+        $company = Company::find($request->company_id);
         if($company!=null){
             $department = new Department($request->all());
+            $department->company_id=$company->id;
             $department->save();
         }
         return response()->json($department, 200);

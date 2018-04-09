@@ -15,11 +15,12 @@ class PositionController extends Controller
     public function create(Request $request) {
         $request->validate([
             'name'=>'required',
-            'dpt_id'=>'required'
+            'department_id'=>'required'
         ]);
-        $department = Department::find($request->dpt_id);
+        $department = Department::find($request->department_id);
         if($department!=null){
             $position = new Position($request->all());
+            $position->department_id = $request->department_id;
             $position->save();
         }
         return response()->json($position, 200);
