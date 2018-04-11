@@ -14,6 +14,7 @@ class EmployeeController extends Controller
         return response()->json(Employee::all());
     }
     public function create(Request $request) {
+        print($request);
         $request->validate([
             'name'=>'required',
             'phone_num'=>'required',

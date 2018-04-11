@@ -46,6 +46,10 @@ class PositionController extends Controller
         }
         return response($response);
     }
+    public function findPositionByName($name){
+        $position = Position::where('name','=',$name)->first();
+        return response()->json($position);
+    }
     public function findAllEmployeesOnPosition($id) {
         $position = Position::find($id);
         if($position!=null){

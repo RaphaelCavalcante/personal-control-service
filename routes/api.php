@@ -43,6 +43,7 @@ Route::get('/position/{id}', 'PositionController@get');
 Route::put('/position/{id}', 'PositionController@update');
 Route::delete('/position/{id}', 'PositionController@delete');
 Route::get('/position/employees/{id}', 'PositionController@findAllEmployeesOnPosition');
+Route::get('/position/get-by-name/{name}', 'PositionController@findPositionByName');
 
 
 
